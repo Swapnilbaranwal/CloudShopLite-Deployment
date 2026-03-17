@@ -18,10 +18,18 @@ spec:
     spec:
       containers:
         - name: api
-          image: flask-api:latest
-          imagePullPolicy: Never
+          image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/api:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
             - name: REDIS_HOST
               value: redis-service
+
+          resources:
+            requests:
+              cpu: "100m"      
+              memory: "128Mi"
+            limits:
+              cpu: "500m"      
+              memory: "256Mi"

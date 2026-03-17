@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/api
+  tag: "latest"
+  pullPolicy: Always
+  
+
+service:
+  type: ClusterIP
+  port: 5000
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
+
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 50
