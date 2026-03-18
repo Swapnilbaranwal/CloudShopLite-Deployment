@@ -1,29 +1,49 @@
+{{- range $name, $config := .Values }}
+
+{{- if and (kindIs "map" $config) (hasKey $config "image") }}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ $name }}-deployment
+  labels:
+    app: {{ $name }}
+
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ $config.replicaCount | default 1 }}
+
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ $name }}
+
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ $name }}
+
     spec:
       containers:
-        - name: app
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: {{ $name }}
 
+          image: "{{ $config.image.repository }}:{{ $config.image.tag | default $.Values.global.imageTag }}"
+          imagePullPolicy: {{ $config.image.pullPolicy | default "IfNotPresent" }}
+
+          {{- if $config.service }}
           ports:
-            - containerPort: {{ .Values.service.port }}
-          
-          env:
-            - name: REDIS_HOST
-              value: redis-service
-              
+            - containerPort: {{ $config.service.port }}
+          {{- else if $config.port }}
+          ports:
+            - containerPort: {{ $config.port }}
+          {{- end }}
 
-          resources:
-{{ toYaml .Values.resources | indent 12 }}
+          {{- if $config.env }}
+          env:
+            {{- range $key, $value := $config.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          {{- end }}
+
+---
+{{- end }}
+{{- end }}

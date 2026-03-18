@@ -1,11 +1,22 @@
+{{- range $name, $svc := .Values.services }}
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-service
+  name: {{ $name }}-service
+  labels:
+    app: {{ $name }}
+
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ $svc.type }}
+
   selector:
-    app: {{ .Release.Name }}
+    app: {{ $name }}
+
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.port }}
+    - port: {{ $svc.port }}
+      targetPort: {{ $svc.port }}
+      protocol: TCP
+
+---
+{{- end }}
