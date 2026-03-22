@@ -5,12 +5,16 @@ This project showcases a microservices architecture using Docker and Kubernetes,
 
 - **API**: Python Flask backend
 - **Frontend**: Python Flask web UI
+# CloudShop Lite — Microservices Demo (Swapnil Edition)
+
+This project demonstrates a microservices architecture using Docker and Kubernetes, featuring:
+
+- **API**: Python Flask backend
+- **Frontend**: Python Flask web UI
 - **Worker**: Python background job processor
 - **Redis**: Caching & message broker
 
-All services are containerized and orchestrated with Kubernetes manifests. The live demo is available at:
-
-**Public URL:** [http://a42ec1aa062b9405387fc7b9d766a850-879456498.us-east-1.elb.amazonaws.com:3000/](http://a42ec1aa062b9405387fc7b9d766a850-879456498.us-east-1.elb.amazonaws.com:3000/)
+All services are containerized and orchestrated with Kubernetes manifests. The live demo will be available at your public cloud URL after deployment.
 
 ---
 
@@ -41,13 +45,11 @@ ci-cd/         # CI/CD configs
 
 Navigate to each service directory and build the Docker images:
 
-
 ```bash
-cd API && docker build -t api-service .
-cd ../Frontend && docker build -t frontend-service .
-cd ../Worker && docker build -t worker-service .
+cd API && docker build -t swapnil-api-service .
+cd ../Frontend && docker build -t swapnil-frontend-service .
+cd ../Worker && docker build -t swapnil-worker-service .
 ```
-
 
 ### 2. Deploy to Kubernetes
 
@@ -61,7 +63,7 @@ This will deploy:
 - API, Frontend, Worker, Redis as pods
 - Services for API, Frontend (LoadBalancer), Redis
 
-**Frontend** is exposed via LoadBalancer. Access the app at the public URL above.
+**Frontend** is exposed via LoadBalancer. Access the app at the public URL after deployment.
 
 ---
 
@@ -74,7 +76,6 @@ cd API && python app.py
 cd Frontend && python app.py
 cd Worker && python worker.py
 ```
-
 
 ---
 

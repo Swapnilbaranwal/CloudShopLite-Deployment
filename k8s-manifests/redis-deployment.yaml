@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/redis:7
+          image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/redis:7
           imagePullPolicy: Always
           ports:
             - containerPort: 6379

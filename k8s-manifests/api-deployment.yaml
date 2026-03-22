@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/api:latest
+          image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/api:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000

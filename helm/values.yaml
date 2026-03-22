@@ -5,7 +5,7 @@ global:
 redis:
   replicaCount: 1
   image:
-    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/redis
+    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/redis
     pullPolicy: Always
     tag: 7
   port: 6379
@@ -13,7 +13,7 @@ redis:
 api:
   replicaCount: 2
   image:
-    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/api
+    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/api
     pullPolicy: Always
     tag: latest
   service:
@@ -24,7 +24,7 @@ api:
 worker:
   replicaCount: 2
   image:
-    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/worker
+    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/worker
     pullPolicy: Always
     tag: latest
   env:
@@ -33,30 +33,30 @@ worker:
 frontend:
   replicaCount: 2
   image:
-    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/frontend
+    repository: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/frontend
     pullPolicy: Always
     tag: latest
   service:
     type: LoadBalancer
     port: 3000
   env:
-    API_URL: http://api-service:5000
+    API_URL: http://swapnil-api-service:5000
 
 
 deployments:
   api:
-    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/api
+    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/api
     port: 5000
 
   worker:
-    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/worker
+    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/worker
 
   frontend:
-    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/frontend
+    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/frontend
     port: 3000
 
   redis:
-    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/cloudshoplite/redis
+    image: 386318839776.dkr.ecr.us-east-1.amazonaws.com/swapnil/redis
     port: 6379
 
 
