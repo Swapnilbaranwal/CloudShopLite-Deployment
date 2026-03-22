@@ -103,6 +103,39 @@ cd Worker && python worker.py
 
 ---
 
+## Architecture Diagram
+
+```mermaid
+flowchart TD
+	User((User))
+	LB[LoadBalancer / Ingress]
+	Frontend[Frontend Service (Flask)]
+	API[API Service (Flask)]
+	Worker[Worker Service (Python)]
+	Redis[(Redis)]
+
+	User --> LB
+	LB --> Frontend
+	Frontend --> API
+	API --> Redis
+	Worker --> Redis
+```
+
+---
+
+## Live Demo Instructions
+
+1. Deploy the application to your Kubernetes cluster (EKS/AKS/GKE).
+2. Ensure the LoadBalancer service exposes the Frontend publicly.
+3. Access the app via the public URL (see your cloud provider dashboard for the external IP/URL).
+4. Demonstrate:
+	- The Frontend UI loads and displays visit/job stats.
+	- The API endpoints respond (health, stats, etc.).
+	- The Worker updates background job stats (refresh to see changes).
+	- Redis is used for state sharing (can show logs or describe setup).
+
+---
+
 ## License
 
 MIT — For educational use
